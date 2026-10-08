@@ -2,7 +2,7 @@ import { Text, View } from "react-native";
 
 const Gato = () => {
     const nome = () => {
-        return 'Flocos'
+        return 'Gato da Palma'
     }
 
     return (
