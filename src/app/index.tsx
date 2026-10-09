@@ -1,79 +1,53 @@
+import TelaDois from "@/components/TelaDois";
+import TelaTres from "@/components/TelaTres";
+import TelaUm from "@/components/TelaUm";
 import { useState } from "react";
-import { Alert, Image, Pressable, ScrollView, StyleSheet, Switch, Text, TextInput } from "react-native";
-
-import Aluno from "@/components/Aluno";
-import Cachorro from "@/components/Cachorro";
-import Funcionario from "@/components/Funcionario";
-import Gato from "@/components/Gato";
-import Multiplicacao from "@/components/Multiplicacao";
-import Pessoa from "@/components/Pessoa";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 
 export default function Index() {
-  const [campo, setCampo] = useState('');
-  const [ativado, setAtivado] = useState(false);
-
-  const acionarPopUp = () => {
-    Alert.alert("Outro botão");
-  };
+  const [telaAtiva, setTelaAtiva] = useState(1);
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Pessoa />
+    <View style={styles.container}>
+      {/* Menu de botões no topo para alternar as telas */}
+      <View style={styles.menu}>
+        <Pressable 
+          style={[styles.botao, telaAtiva === 1 && styles.botaoAtivo]} 
+          onPress={() => setTelaAtiva(1)}
+        >
+          <Text style={telaAtiva === 1 && styles.textoAtivo}>Tela 1</Text>
+        </Pressable>
 
-      <Pressable onPress={acionarPopUp}>
-        <Text>Boa noite.</Text>
-      </Pressable>
+        <Pressable 
+          style={[styles.botao, telaAtiva === 2 && styles.botaoAtivo]} 
+          onPress={() => setTelaAtiva(2)}
+        >
+          <Text style={telaAtiva === 2 && styles.textoAtivo}>Tela 2</Text>
+        </Pressable>
 
-      <Pressable
-        onPress={(evento) => {
-          Alert.alert(`Campo: ${campo}`);
-          console.log(evento);
-        }}>
-        <Text>Boa noite.</Text>
-      </Pressable>
+        <Pressable 
+          style={[styles.botao, telaAtiva === 3 && styles.botaoAtivo]} 
+          onPress={() => setTelaAtiva(3)}
+        >
+          <Text style={telaAtiva === 3 && styles.textoAtivo}>Tela 3</Text>
+        </Pressable>
+      </View>
 
-      <Gato />
-
-      <Cachorro nome="Orelha" raca="pitbul" />
-
-      <Funcionario
-        nome="Leonardo"
-        idade={17}
-        setor="Tecnologia da Informacao"
-      />
-
-      <Aluno
-        nome="Leonardo"
-        idade={17}
-        turma="3 Ano"
-        nota1={8.0}
-        nota2={9.5}
-      />
-
-       <Image source={{uri: ("https://img.magnific.com/fotos-premium/globo-da-terra-a-noite-elementos-desta-imagem-fornecidos-pela-nasa-renderizacao-3d_924688-4494.jpg?semt=ais_hybrid&w=740&q=80")}} style={{width: 200, height: 200}}/>
-
-      <Multiplicacao valor1={2} valor2={4} valor3={5} />
-
-      <TextInput
-        placeholder="Digite algo..."
-        value={campo}
-        onChangeText={(text) => { setCampo(text); }}
-        style={{ borderWidth: 1, width: 200, marginVertical: 10, padding: 5 }}
-      />
-
-      <Switch
-        value={ativado}
-        onValueChange={(valor) => { setAtivado(valor); }}
-      />
-    </ScrollView>
+      {/* Renderização condicional da tela ativa */}
+      <View style={styles.conteudo}>
+        {telaAtiva === 1 && <TelaUm />}
+        {telaAtiva === 2 && <TelaDois />}
+        {telaAtiva === 3 && <TelaTres />}
+      </View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 40,
-  },
+  container: { flex: 1, paddingTop: 40, backgroundColor: "#fff" },
+  menu: { flexDirection: "row", justifyContent: "space-around", padding: 10, borderBottomWidth: 1, borderBottomColor: "#ccc" },
+  botao: { paddingVertical: 8, paddingHorizontal: 15, borderWidth: 1, borderColor: "#888", borderRadius: 5 },
+  botaoAtivo: { backgroundColor: "#007AFF", borderColor: "#007AFF" },
+  textoAtivo: { color: "#fff", fontWeight: "bold" },
+  conteudo: { flex: 1 }
 });
