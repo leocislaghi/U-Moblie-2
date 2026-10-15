@@ -8,11 +8,11 @@ import Gato from "@/components/Gato";
 import Multiplicacao from "@/components/Multiplicacao";
 import Pessoa from "@/components/Pessoa";
 
-// Definição dos dados fornecidos
-const aluno1: AlunoType = { nome: 'Ana', idade: 10, turma: '22', nota1: 10, nota2: 8 };
-const aluno2: AlunoType = { nome: 'Carlos', idade: 11, turma: '22', nota1: 7, nota2: 6 };
-const aluno3: AlunoType = { nome: 'Cláudio', idade: 10, turma: '23', nota1: 7.5, nota2: 9 };
-const aluno4: AlunoType = { nome: 'Renato', idade: 11, turma: '23', nota1: 6, nota2: 5 };
+
+const aluno1: AlunoType = { nome: 'Leo', idade: 16, turma: '1', nota1: 10, nota2: 8 };
+const aluno2: AlunoType = { nome: 'Joao', idade: 18, turma: '1', nota1: 7, nota2: 6 };
+const aluno3: AlunoType = { nome: 'Pedro', idade: 19, turma: '2', nota1: 7.5, nota2: 9 };
+const aluno4: AlunoType = { nome: 'Manu', idade: 17, turma: '2', nota1: 6, nota2: 5 };
 
 const lista: AlunoType[] = [aluno1, aluno2, aluno3, aluno4];
 
