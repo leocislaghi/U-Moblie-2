@@ -1,56 +1,74 @@
-import { Alert, Pressable, StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 
-interface AlunoProps {
+export type AlunoType = {
   nome: string;
   idade: number;
   turma: string;
   nota1: number;
   nota2: number;
-}
+};
 
-export default function Aluno({ nome, idade, turma, nota1, nota2 }: AlunoProps) {
+export default function Aluno({ nome, idade, turma, nota1, nota2 }: AlunoType) {
   const media = (nota1 + nota2) / 2;
-
-  const mostrarDadosAluno = () => {
-    Alert.alert(
-      "Dados do Aluno",
-      `\nIdade: ${idade} anos\nTurma: ${turma}\nNota 1: ${nota1}\nNota 2: ${nota2}\nMédia: ${media.toFixed(1)}`
-    );
-  };
+  const status = media >= 7 ? "Aprovado" : "Reprovado";
 
   return (
     <View style={styles.card}>
-      <Text style={styles.nome}>Aluno: {nome}</Text>
+      <Text style={styles.titulo}>Dados do Aluno</Text>
+      <Text style={styles.texto}><Text style={styles.label}>Nome:</Text> {nome}</Text>
+      <Text style={styles.texto}><Text style={styles.label}>Idade:</Text> {idade} anos</Text>
+      <Text style={styles.texto}><Text style={styles.label}>Turma:</Text> {turma}</Text>
+      <Text style={styles.texto}><Text style={styles.label}>Nota 1:</Text> {nota1}</Text>
+      <Text style={styles.texto}><Text style={styles.label}>Nota 2:</Text> {nota2}</Text>
 
-      <Pressable style={styles.botao} onPress={mostrarDadosAluno}>
-        <Text style={styles.textoBotao}>Exibir Dados e Média</Text>
-      </Pressable>
+      <View style={styles.resultadoContainer}>
+        <Text style={styles.resultadoTexto}>
+          Média Final: {media.toFixed(1)} - <Text style={status === "Aprovado" ? styles.aprovado : styles.reprovado}>{status}</Text>
+        </Text>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   card: {
-    padding: 10,
-    marginVertical: 10,
     borderWidth: 1,
     borderColor: '#ccc',
     borderRadius: 8,
-    width: '80%',
+    padding: 16,
+    marginVertical: 8,
+    width: 280,
+    backgroundColor: '#f9f9f9',
+  },
+  titulo: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 8,
+    textAlign: 'center',
+  },
+  texto: {
+    fontSize: 14,
+    marginVertical: 2,
+  },
+  label: {
+    fontWeight: 'bold',
+  },
+  resultadoContainer: {
+    marginTop: 12,
+    paddingTop: 8,
+    borderTopWidth: 1,
+    borderTopColor: '#ddd',
     alignItems: 'center',
   },
-  nome: {
+  resultadoTexto: {
+    fontSize: 15,
     fontWeight: 'bold',
-    fontSize: 16,
-    marginBottom: 8,
   },
-  botao: {
-    backgroundColor: '#28a745',
-    padding: 10,
-    borderRadius: 5,
+  aprovado: {
+    color: 'green',
   },
-  textoBotao: {
-    color: '#fff',
-    fontWeight: 'bold',
+  reprovado: {
+    color: 'red',
   },
 });
